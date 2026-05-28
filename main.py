@@ -30,15 +30,7 @@ def obtener_categoria(titulo, desc=""):
             return cat
     return "General"
 
-def obtener_noticias():
-    try:
-        resp = requests.get("https://newsapi.org/v2/top-headlines", 
-                            params={"country": "mx", "pageSize": 10, "apiKey": NEWS_KEY, "language": "es"}, timeout=30)
-        resp.raise_for_status()
-        return [a for a in resp.json().get("articles", []) if a.get("title") and a.get("url")]
-    except Exception as e:
-        logging.error(f"Error noticias: {e}")
-        return []
+obtener_noticias()
 
 def resumen_inteligente(desc, titulo):
     if not desc: return titulo[:90] + "..."
